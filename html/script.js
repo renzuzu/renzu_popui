@@ -63,6 +63,9 @@
 	directions.sort( function( a, b ) {
 	  return distance( mx, my, a.x, a.y ) - distance( mx, my, b.x, b.y );
 	} );
+
+	console.log(directions.shift().id)
+	console.clear();
 	btn.setAttribute( 'data-direction', directions.shift().id );
 	btn.classList.add( 'is-open' );
   }
@@ -78,6 +81,7 @@
 	window.addEventListener('message', function (table) {
 	  let event = table.data;
 	  if (event.type == 'inzone') {
+		  //console.log("ASO")
 		showpop(event.table,event.invehicle)
 	  }
 	  if (event.type == 'outzone') {
@@ -86,5 +90,6 @@
 	  }
 	  if (event.type == 'reset') {
 		window.location.reload(false);
+		//console.log("reset")
 	  }
 	});
