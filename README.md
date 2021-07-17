@@ -20,5 +20,6 @@ local table = {
 
     - Close UI
     
-    `TriggerEvent('renzu_popui:closeui')
+    TriggerEvent('renzu_popui:closeui')
+    
     ```
