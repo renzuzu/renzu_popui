@@ -4,7 +4,8 @@ POPUP UI to Send Events instead of using while loop controlpressed - FIVEM [WIP]
 - ![alt text](https://i.imgur.com/y8kyg09.png)
 
 - SAMPLE USAGE
-`   local table = {
+``` 
+local table = {
         ['event'] = 'opengarage',
         ['title'] = 'Garage A',
         ['server_event'] = false,
@@ -18,4 +19,6 @@ POPUP UI to Send Events instead of using while loop controlpressed - FIVEM [WIP]
     TriggerEvent('renzu_popui:showui',table)`
 
     - Close UI
-    `TriggerEvent('renzu_popui:closeui')`
+    
+    `TriggerEvent('renzu_popui:closeui')
+    ```
