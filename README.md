@@ -1,7 +1,8 @@
 # renzu_popui
 POPUP UI to Send Events instead of using while loop controlpressed - FIVEM [WIP]
 - SAMPLE USAGE
-```  local table = {
+```  
+local table = {
         ['event'] = 'opengarage',
         ['title'] = 'Garage A',
         ['server_event'] = false,
