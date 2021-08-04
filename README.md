@@ -4,7 +4,7 @@ POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00
 # Methods
 # POPUI
 - DEMO
-- ![image](https://user-images.githubusercontent.com/82306584/128149638-1ebd6be1-7100-4a8b-a3e6-64e1f974abee.png)
+- ![image](https://user-images.githubusercontent.com/82306584/128152418-cf190597-4438-4860-8d63-d49874a763ef.png)
 
 - SAMPLE USAGE
 ``` 
@@ -32,7 +32,7 @@ POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00
 # DrawTEXTUI
 
 - DEMO
-![image](https://user-images.githubusercontent.com/82306584/128149843-b258f43e-64e5-45b0-acf0-626250f8ea80.png)
+![image](https://user-images.githubusercontent.com/82306584/128152314-5cfab36f-1ed3-44e3-8b8c-49ed518388f9.png)
 - SAMPLE USAGE
 
 ``` 
