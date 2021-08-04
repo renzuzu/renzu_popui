@@ -103,6 +103,7 @@ POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00
                             }
                            TriggerEvent('renzu_popui:drawtextuiwithinput',table) -- show the ui
                            while dist <= 3.5 do -- wait for dist become > 3.5 and close the ui once its > 3.5
+                                coords = GetEntityCoords(PlayerPedId() -- coords need to be here to be refreshed ea 500ms
                                 dist = GetDistanceBetweenCoords(pos["x"], pos["y"], pos["z"] + 0.98, coords, true)
                                 Wait(500)
                            end
@@ -140,6 +141,7 @@ POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00
                            }
                            TriggerEvent('renzu_popui:showui',table) -- show the ui
                            while dist <= 3.5 do -- wait for dist become > 3.5 and close the ui once its > 3.5
+                                coords = GetEntityCoords(PlayerPedId() -- coords need to be here to be refreshed ea 500ms
                                 dist = GetDistanceBetweenCoords(pos["x"], pos["y"], pos["z"] + 0.98, coords, true)
                                 Wait(500)
                            end
