@@ -37,15 +37,15 @@ POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00
 
 ``` 
         local table = {
-        ['key'] = 'E', -- key
-        ['event'] = 'script:myevent',
-        ['title'] = 'Press [E] to BUY COLA',
-        ['invehicle_title'] = 'BUY COLA',
-        ['server_event'] = false, -- server event or client
-        ['unpack_arg'] = false, -- send args as unpack 1,2,3,4 order
-        ['fa'] = '<i class="fad fa-gas-pump"></i>',
-        ['custom_arg'] = arg, -- example: {1,2,3,4}
-    }
+                ['key'] = 'E', -- key
+                ['event'] = 'script:myevent',
+                ['title'] = 'Press [E] to BUY COLA',
+                ['invehicle_title'] = 'BUY COLA',
+                ['server_event'] = false, -- server event or client
+                ['unpack_arg'] = false, -- send args as unpack 1,2,3,4 order
+                ['fa'] = '<i class="fad fa-gas-pump"></i>',
+                ['custom_arg'] = arg, -- example: {1,2,3,4}
+        }
         
         TriggerEvent('renzu_popui:drawtextuiwithinput',table)
         
