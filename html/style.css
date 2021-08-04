@@ -156,8 +156,8 @@ transform: translateZ(-2px) rotateY(180deg); }
   border-top-left-radius: 50px;
   border-bottom-right-radius: 50px;
   padding: 10px;
-  border-style: double;
-  border-color: #48a2ec;
+  border-color: #f9f9f9;
+  border-style: solid;
   }
 
 .btn[data-direction="top"].is-open {
