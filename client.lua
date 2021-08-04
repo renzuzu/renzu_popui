@@ -1,6 +1,6 @@
 local open = false
 RegisterNUICallback('zone_event', function(data, cb)
-    Event(data,data['custom_arg'] or {})
+    Event(data,data.table['custom_arg'] or {})
     SetNuiFocus(false,false)
     SetNuiFocusKeepInput(false)
 end)
@@ -12,18 +12,38 @@ RegisterNUICallback('close', function(data, cb)
     SetNuiFocusKeepInput(false)
 end)
 
+RegisterNetEvent('renzu_popui:drawtextuiwithinput')
+AddEventHandler('renzu_popui:drawtextuiwithinput', function(table)
+    local t = {
+        ['type'] = 'drawtext',
+        ['fa'] = table.fa or '<i class="fad fa-sign"></i>',
+        ['event'] = table.event,
+        ['title'] = table.title,
+        ['server_event'] = table.server_event ~= nil and table.server_event ~= false,
+        ['unpack_arg'] = table.unpack_arg or false,
+        ['invehicle_title'] = table.invehicle_title or false,
+        ['custom_arg'] = table.custom_arg,
+        ['key'] = table.key or 'E',
+    }
+    SendNUIMessage({type = "inzone", table = t, invehicle = IsPedInAnyVehicle(PlayerPedId())})
+    SetNuiFocus(true,false)
+    SetNuiFocusKeepInput(true)
+end)
+
 RegisterNetEvent('renzu_popui:showui')
 AddEventHandler('renzu_popui:showui', function(table)
     open = true
     local t = {
+        ['type'] = 'normal',
         ['event'] = table.event,
         ['title'] = table.title,
+        ['fa'] = table.fa or '<i class="fad fa-sign"></i>',
         ['server_event'] = table.server_event ~= nil and table.server_event ~= false,
-        ['unpack_arg'] = table.unpack or false,
+        ['unpack_arg'] = table.unpack_arg or false,
         ['invehicle_title'] = table.invehicle_title or false,
         ['confirm'] = table.confirm or '[ENTER]',
         ['reject'] = table.reject or '[CLOSE]',
-        ['custom_arg'] = table.custom_arg or {},
+        ['custom_arg'] = table.custom_arg,
         ['use_cursor'] = table.use_cursor or false,
     }
     SendNUIMessage({type = "inzone", table = t, invehicle = IsPedInAnyVehicle(PlayerPedId())})
