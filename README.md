@@ -1,5 +1,5 @@
 # renzu_popui
-POPUP UI to Send Events instead of using while loop controlpressed - FIVE (0.00 ms idle or active)
+POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00 ms idle or active)
 
 # Methods
 # POPUI
