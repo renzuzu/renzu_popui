@@ -95,9 +95,6 @@ POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00
                                 ['key'] = 'E', -- key
                                 ['event'] = 'script:myevent',
                                 ['title'] = 'Press [E] to BUY Jerry Can',
-                                ['invehicle_title'] = 'BUY Jerry Can',
-                                ['server_event'] = false, -- server event or client
-                                ['unpack_arg'] = false, -- send args as unpack 1,2,3,4 order
                                 ['fa'] = '<i class="fad fa-gas-pump"></i>',
                                 ['custom_arg'] = {}, -- example: {1,2,3,4}
                             }
@@ -130,13 +127,9 @@ POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00
                             local table = {
                                 ['event'] = 'opengarage',
                                 ['title'] = 'Garage A',
-                                ['server_event'] = false,
-                                ['unpack_arg'] = false,
-                                ['invehicle_title'] = 'Store Vehicle',
                                 ['confirm'] = '[ENTER]',
                                 ['reject'] = '[CLOSE]',
                                 ['fa'] = '<i class="fad fa-gas-pump"></i>',
-                                ['custom_arg'] = {}, -- example: {1,2,3,4}
                                 ['use_cursor'] = false, -- USE MOUSE CURSOR INSTEAD OF INPUT (ENTER)
                            }
                            TriggerEvent('renzu_popui:showui',table) -- show the ui
