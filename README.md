@@ -44,7 +44,7 @@ POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00
                 ['server_event'] = false, -- server event or client
                 ['unpack_arg'] = false, -- send args as unpack 1,2,3,4 order
                 ['fa'] = '<i class="fad fa-gas-pump"></i>',
-                ['custom_arg'] = arg, -- example: {1,2,3,4}
+                ['custom_arg'] = {}, -- example: {1,2,3,4}
         }
         
         TriggerEvent('renzu_popui:drawtextuiwithinput',table)
