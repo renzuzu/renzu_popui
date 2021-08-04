@@ -71,7 +71,7 @@ POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00
                             sleep = 5
                             DrawText3D(pos["x"], pos["y"], pos["z"], "Press [E] to Buy Jerry Can")
                             if IsControlJustPressed(0, Keys["E"]) then
-                                SampleFunc()
+                                TriggerEvent('script:myevent')
                             end
                             -- TO REPLACE CODE END
                         end
