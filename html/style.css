@@ -147,7 +147,7 @@ transition: background 0.15s ease, line-height 0.5s cubic-bezier(0.23, 1, 0.32, 
 .btn[data-direction="right"] .btn-back {
 transform: translateZ(-2px) rotateY(180deg); }
 
-.btn.is-open {width: 100%;height: 120px;min-width: 250px;max-width: 500px;line-height: 10px;}
+.btn.is-open {width: 100%;height: 120px;min-width: 250px;max-width: 500px;line-height: 10px;right: 7%;}
 .btn.is-open .btn-front {
   pointer-events: none;
   line-height: 160px; }
@@ -163,8 +163,7 @@ transform: translateZ(-2px) rotateY(180deg); }
 .btn[data-direction="top"].is-open {
 transform: rotateX(180deg); }
 
-.btn[data-direction="right"].is-open {
-transform: rotateY(180deg); }
+.btn[data-direction="right"].is-open {transform: rotateY(180deg);}
 
 .btn[data-direction="bottom"].is-open {
 transform: rotateX(-180deg); }
