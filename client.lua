@@ -1,12 +1,16 @@
 local open = false
+local sent = false
 RegisterNUICallback('zone_event', function(data, cb)
+    sent = true
     Event(data,data.table['custom_arg'] or {})
     SetNuiFocus(false,false)
     SetNuiFocusKeepInput(false)
+    Wait(1000)
+    sent = false
 end)
 
 RegisterNUICallback('close', function(data, cb)
-    Wait(200)
+    while not sent do Wait(100) end
     open = false
     SendNUIMessage({type = "reset", content = true})
     SetNuiFocus(false,false)

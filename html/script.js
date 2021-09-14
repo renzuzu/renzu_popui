@@ -264,16 +264,14 @@
 	} );
 
 	directions.shift().id
-	console.clear();
 	btn.setAttribute( 'data-direction', directions.shift().id );
 	btn.classList.add( 'is-open' );
   }
 
 	function hidepop() {
-		pop = false
+		close()
 		var btn = document.querySelector( '.btn' );
 		btn.classList.remove( 'is-open' );
-		close()
 	}
 
 	var current = undefined
@@ -293,6 +291,6 @@
 		document.getElementById("popbutton").style.display = 'none';
 	  }
 	  if (event.type == 'reset') {
-		window.location.reload(false);
+		window.location.reload(false)
 	  }
 	});
