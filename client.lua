@@ -66,6 +66,13 @@ AddEventHandler('renzu_popui:showui', function(table)
         SetNuiFocusKeepInput(true)
         Wait(1000)
         open = true
+        Citizen.CreateThread(function()
+            while open do
+                SetNuiFocus(true,table.use_cursor)
+                SetNuiFocusKeepInput(true)
+                Wait(100)
+            end
+        end)
         lastpop = table.title
         while open and table.use_cursor do
             DisableControlAction(1, 1, true)
