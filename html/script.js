@@ -272,6 +272,7 @@
 		close()
 		var btn = document.querySelector( '.btn' );
 		btn.classList.remove( 'is-open' );
+		window.location.reload(false)
 	}
 
 	var current = undefined
