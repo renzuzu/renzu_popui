@@ -47,6 +47,7 @@ RegisterNetEvent('renzu_popui:showui')
 AddEventHandler('renzu_popui:showui', function(table)
     if not open then
         open = false
+        Wait(1000)
         pop = table.title
         local t = {
             ['type'] = 'normal',
@@ -64,7 +65,6 @@ AddEventHandler('renzu_popui:showui', function(table)
         SendNUIMessage({type = "inzone", table = t, invehicle = IsPedInAnyVehicle(PlayerPedId())})
         SetNuiFocus(true,table.use_cursor)
         SetNuiFocusKeepInput(true)
-        Wait(1000)
         open = true
         Citizen.CreateThread(function()
             while open do
