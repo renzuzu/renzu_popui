@@ -1,5 +1,6 @@
 local open = false
 local sent = false
+local closing = false
 RegisterNUICallback('zone_event', function(data, cb)
     sent = true
     Event(data,data.table['custom_arg'] or {})
@@ -10,7 +11,11 @@ RegisterNUICallback('zone_event', function(data, cb)
 end)
 
 RegisterNUICallback('close', function(data, cb)
-    while not sent do Wait(100) end
+    SetNuiFocus(false,false)
+    SetNuiFocusKeepInput(false)
+    local count = 0
+    while not sent and count < 20 do closing = true count = count + 1 Wait(100) end
+    Wait(250)
     open = false
     SendNUIMessage({type = "reset", content = true})
     SetNuiFocus(false,false)
@@ -46,7 +51,9 @@ end)
 RegisterNetEvent('renzu_popui:showui')
 AddEventHandler('renzu_popui:showui', function(table)
     if not open then
+        Wait(1000)
         open = false
+        while IsNuiFocused() do Wait(100) end
         Wait(1000)
         pop = table.title
         local t = {
@@ -68,15 +75,18 @@ AddEventHandler('renzu_popui:showui', function(table)
         open = true
         Citizen.CreateThread(function()
             while open do
-                if not IsNuiFocused() then
+                if not IsNuiFocused() and not closing then
                     SetNuiFocus(true,table.use_cursor)
                     SetNuiFocusKeepInput(true)
                 end
                 Wait(100)
             end
+            open = false
+            closing = false
+            return
         end)
         lastpop = table.title
-        while open and table.use_cursor do
+        while open and table.use_cursor and not closing do
             DisableControlAction(1, 1, true)
             DisableControlAction(1, 2, true)
             DisableControlAction(1, 69, true)
@@ -93,6 +103,8 @@ AddEventHandler('renzu_popui:showui', function(table)
             Wait(1)
         end
     end
+    SetNuiFocus(false,false)
+    SetNuiFocusKeepInput(false)
 end)
 
 RegisterNetEvent('renzu_popui:closeui')
