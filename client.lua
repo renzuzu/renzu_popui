@@ -68,8 +68,10 @@ AddEventHandler('renzu_popui:showui', function(table)
         open = true
         Citizen.CreateThread(function()
             while open do
-                SetNuiFocus(true,table.use_cursor)
-                SetNuiFocusKeepInput(true)
+                if not IsNuiFocused() then
+                    SetNuiFocus(true,table.use_cursor)
+                    SetNuiFocusKeepInput(true)
+                end
                 Wait(100)
             end
         end)
