@@ -239,8 +239,8 @@
 		regkey = table['key'].toLowerCase()
 	}
 	if (table['confirm']) {
-		document.getElementById("confirm").innerHTML = table['confirm'];
-		document.getElementById("reject").innerHTML = table['reject'];
+		document.getElementById("confirm").innerHTML = 'Enter';
+		document.getElementById("reject").innerHTML = 'Close';
 	}
 	document.getElementById("fa").innerHTML = table['fa'];
 	var btn = document.querySelector( '.btn' );
