@@ -28,6 +28,7 @@ RegisterNetEvent('renzu_popui:drawtextuiwithinput')
 AddEventHandler('renzu_popui:drawtextuiwithinput', function(table)
     open = false
     pop = table.title
+    while IsNuiFocused() do Wait(100) open = false end
     local t = {
         ['type'] = 'drawtext',
         ['fa'] = table.fa or '<i class="fad fa-sign"></i>',
@@ -53,7 +54,7 @@ AddEventHandler('renzu_popui:showui', function(table)
     if not open then
         Wait(1000)
         open = false
-        while IsNuiFocused() do Wait(100) end
+        while IsNuiFocused() do Wait(100) open = false end
         Wait(1000)
         pop = table.title
         local t = {
