@@ -30,7 +30,7 @@ POPUP UI to Fire Events instead of using while loop controlpressed - FIVEM (0.00
  
  # POPUI
 - DEMO
-![image](https://user-images.githubusercontent.com/82306584/134336586-ccb76538-167a-46df-92e2-3d7ad284525b.png)
+![image](https://user-images.githubusercontent.com/82306584/134346087-07bb9bdf-1ff6-4514-93be-333510497316.png)
 
 - SAMPLE USAGE
 ``` 
