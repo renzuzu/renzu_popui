@@ -26,6 +26,7 @@ local lastpop = nil
 local pop = nil
 RegisterNetEvent('renzu_popui:drawtextuiwithinput')
 AddEventHandler('renzu_popui:drawtextuiwithinput', function(table)
+    local coord = GetEntityCoords(PlayerPedId())
     open = false
     pop = table.title
     while IsNuiFocused() do Wait(100) open = false end
@@ -46,11 +47,33 @@ AddEventHandler('renzu_popui:drawtextuiwithinput', function(table)
     SetNuiFocus(true,false)
     SetNuiFocusKeepInput(true)
     Wait(1000)
+    Citizen.CreateThread(function()
+        while open do
+            if not IsNuiFocused() and not closing then
+                SetNuiFocus(true,false)
+                SetNuiFocusKeepInput(true)
+            end
+            if #(GetEntityCoords(PlayerPedId()) - coord) > 15 then
+                open = false
+                SendNUIMessage({type = "reset", content = true})
+                SetNuiFocus(false,false)
+                SetNuiFocusKeepInput(false)
+                closing = true
+                Wait(2000)
+                break
+            end
+            Wait(100)
+        end
+        open = false
+        closing = false
+        return
+    end)
     lastpop = table.title
 end)
 
 RegisterNetEvent('renzu_popui:showui')
 AddEventHandler('renzu_popui:showui', function(table)
+    local coord = GetEntityCoords(PlayerPedId())
     if not open then
         Wait(1000)
         open = false
@@ -80,11 +103,28 @@ AddEventHandler('renzu_popui:showui', function(table)
                     SetNuiFocus(true,table.use_cursor)
                     SetNuiFocusKeepInput(true)
                 end
+                if #(GetEntityCoords(PlayerPedId()) - coord) > 15 then
+                    open = false
+                    SendNUIMessage({type = "reset", content = true})
+                    SetNuiFocus(false,false)
+                    SetNuiFocusKeepInput(false)
+                    closing = true
+                    Wait(2000)
+                    break
+                end
                 Wait(100)
             end
             open = false
             closing = false
             return
+        end)
+
+        Citizen.CreateThread(function()
+            Wait(15000)
+            open = false
+            SendNUIMessage({type = "reset", content = true})
+            SetNuiFocus(false,false)
+            SetNuiFocusKeepInput(false)
         end)
         lastpop = table.title
         while open and table.use_cursor and not closing do
