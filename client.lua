@@ -8,13 +8,14 @@ RegisterNUICallback('zone_event', function(data, cb)
     SetNuiFocusKeepInput(false)
     Wait(1000)
     sent = false
+    TriggerEvent('renzu_popui:closeui')
 end)
 
 RegisterNUICallback('close', function(data, cb)
     SetNuiFocus(false,false)
     SetNuiFocusKeepInput(false)
     local count = 0
-    while not sent and count < 20 do closing = true count = count + 1 Wait(100) end
+    while open and not sent and count < 20 do closing = true count = count + 1 Wait(100) end
     Wait(250)
     open = false
     SendNUIMessage({type = "reset", content = true})
@@ -24,12 +25,14 @@ end)
 
 local lastpop = nil
 local pop = nil
+local waiting = false
 RegisterNetEvent('renzu_popui:drawtextuiwithinput')
 AddEventHandler('renzu_popui:drawtextuiwithinput', function(table)
     local coord = GetEntityCoords(PlayerPedId())
-    open = false
+    if waiting or open then return end
     pop = table.title
-    while IsNuiFocused() do Wait(100) open = false end
+    while IsNuiFocused() do waiting = true print('gago') Wait(100) open = false end
+    waiting = false
     local t = {
         ['type'] = 'drawtext',
         ['fa'] = table.fa or '<i class="fad fa-sign"></i>',
@@ -41,7 +44,7 @@ AddEventHandler('renzu_popui:drawtextuiwithinput', function(table)
         ['custom_arg'] = table.custom_arg,
         ['key'] = table.key or 'E',
     }
-    Wait(1000)
+    Wait(100)
     open = true
     SendNUIMessage({type = "inzone", table = t, invehicle = IsPedInAnyVehicle(PlayerPedId())})
     SetNuiFocus(true,false)
@@ -53,7 +56,7 @@ AddEventHandler('renzu_popui:drawtextuiwithinput', function(table)
                 SetNuiFocus(true,false)
                 SetNuiFocusKeepInput(true)
             end
-            if #(GetEntityCoords(PlayerPedId()) - coord) > 15 then
+            if #(GetEntityCoords(PlayerPedId()) - coord) > 5 then
                 open = false
                 SendNUIMessage({type = "reset", content = true})
                 SetNuiFocus(false,false)
@@ -64,6 +67,7 @@ AddEventHandler('renzu_popui:drawtextuiwithinput', function(table)
             end
             Wait(100)
         end
+        TriggerEvent('renzu_popui:closeui')
         open = false
         closing = false
         return
@@ -73,11 +77,13 @@ end)
 
 RegisterNetEvent('renzu_popui:showui')
 AddEventHandler('renzu_popui:showui', function(table)
-    local coord = GetEntityCoords(PlayerPedId())
     if not open then
+        local coord = GetEntityCoords(PlayerPedId())
         Wait(1000)
         open = false
-        while IsNuiFocused() do Wait(100) open = false end
+        if waiting then return end
+        while IsNuiFocused() do waiting = true Wait(100) open = false end
+        waiting = false
         Wait(1000)
         pop = table.title
         local t = {
@@ -103,7 +109,19 @@ AddEventHandler('renzu_popui:showui', function(table)
                     SetNuiFocus(true,table.use_cursor)
                     SetNuiFocusKeepInput(true)
                 end
-                if #(GetEntityCoords(PlayerPedId()) - coord) > 15 then
+                Wait(100)
+            end
+            open = false
+            closing = false
+            return
+        end)
+        Citizen.CreateThread(function()
+            while open do
+                if not IsNuiFocused() and not closing then
+                    SetNuiFocus(true,false)
+                    SetNuiFocusKeepInput(true)
+                end
+                if #(GetEntityCoords(PlayerPedId()) - coord) > 5 then
                     open = false
                     SendNUIMessage({type = "reset", content = true})
                     SetNuiFocus(false,false)
@@ -114,17 +132,10 @@ AddEventHandler('renzu_popui:showui', function(table)
                 end
                 Wait(100)
             end
+            TriggerEvent('renzu_popui:closeui')
             open = false
             closing = false
             return
-        end)
-
-        Citizen.CreateThread(function()
-            Wait(15000)
-            open = false
-            SendNUIMessage({type = "reset", content = true})
-            SetNuiFocus(false,false)
-            SetNuiFocusKeepInput(false)
         end)
         lastpop = table.title
         while open and table.use_cursor and not closing do
@@ -149,8 +160,8 @@ AddEventHandler('renzu_popui:showui', function(table)
 end)
 
 RegisterNetEvent('renzu_popui:closeui')
-AddEventHandler('renzu_popui:closeui', function(table)
-    if open then
+AddEventHandler('renzu_popui:closeui', function(force)
+    if open or force then
         open = false
         SendNUIMessage({type = "reset", content = true})
         SetNuiFocus(false,false)
