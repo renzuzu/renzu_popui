@@ -31,7 +31,7 @@ AddEventHandler('renzu_popui:drawtextuiwithinput', function(table)
     local coord = GetEntityCoords(PlayerPedId())
     if waiting or open then return end
     pop = table.title
-    while IsNuiFocused() do waiting = true print('gago') Wait(100) open = false end
+    while IsNuiFocused() do waiting = true Wait(100) open = false end
     waiting = false
     local t = {
         ['type'] = 'drawtext',
